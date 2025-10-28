@@ -1,0 +1,31 @@
+kubectl version                 # Mostra versão do client e do cluster
+kubectl cluster-info            # Info do cluster atual
+kubectl get nodes               # Lista os nós do cluster
+kubectl get namespaces          # Lista namespaces
+kubectl config get-contexts     # Mostra contextos do kubeconfig
+kubectl config use-context <nome>  # Troca de contexto (ex: minikube, EKS, GKE)
+
+
+kubectl apply -f arquivo.yaml          # Cria/atualiza um recurso a partir do YAML
+kubectl create deployment vote --image=nginx  # Cria deployment rápido (modo CLI)
+kubectl delete -f arquivo.yaml         # Remove o recurso definido no YAML
+kubectl delete deployment vote         # Deleta um deployment específico
+
+
+kubectl get ns                            # Lista namespaces
+kubectl create namespace teste            # Cria namespace
+kubectl delete namespace teste            # Remove namespace
+kubectl get pods -n kube-system           # Lista pods de um namespace específico
+kubectl config set-context --current --namespace=teste  # Define namespace padrão
+
+
+kubectl scale deployment vote --replicas=5   # Muda o número de réplicas
+kubectl autoscale deployment vote --min=2 --max=10 --cpu-percent=80  # Cria autoscaling (HPA)
+
+
+kubectl delete pod nome-do-pod                   # Deleta um pod (será recriado pelo Deployment)
+kubectl delete all --all                         # Deleta tudo (cuidado!)
+kubectl delete -f .                              # Remove tudo no diretório atual
+
+
+kubectl exec -it pod -- bash               # Acessa o shell de um pod
