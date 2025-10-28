@@ -33,6 +33,24 @@ Antes de rodar o projeto, verifique se você possui as seguintes ferramentas ins
 
 ## ⚙️ Instalação do Minikube
 
+```
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
+
+# Testar
+kubectl version --client
+```
+
+## Instalação do kubectl
+```
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+# Testar instalação
+minikube version
+```
+
 ### 🧠 1. Iniciar o cluster
 
 ```bash
@@ -196,3 +214,29 @@ Feito com 💙 para fins educacionais e laboratoriais.
 Por Felipe Rodrigues, Luiz Menosso, Luiz Augusto, Eduardo, Marco Boschetti.
 
 * [Repositório do projeto](https://github.com/MarcoBosc/catsVsDogs/)
+
+
+
+#### Extra: Instalação do docker (caso não tiver)
+```
+# Atualizar pacotes
+sudo apt update
+sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+
+# Adicionar chave do Docker
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+# Adicionar repositório Docker
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Instalar Docker
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io
+
+# Adicionar seu usuário ao grupo docker (para rodar sem sudo)
+sudo usermod -aG docker $USER
+newgrp docker
+
+# Testar
+docker run hello-world
+```
